@@ -1,0 +1,132 @@
+﻿<Window x:Class="BdKursDis.View.CraftView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CraftView" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <materialDesign:Card Margin="5">
+                <Grid>
+                    <Label
+                        FontSize="30"
+                        Content="Рецепт"
+                        HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <ListBox
+                            Margin="0,50,0,0"
+                            x:Name="RList"
+                            Style="{StaticResource MaterialDesignCardsListBox}"
+                            ItemsSource="{Binding RecipeIngridients}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Viewbox>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox
+                                                materialDesign:HintAssist.Hint="Ингридиент"
+                                                Text="{Binding Ingredient.Name}"
+
+                                                IsReadOnly="True"
+                                                Margin="3"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                VerticalContentAlignment="Center" />
+                                            <TextBox
+                                                materialDesign:HintAssist.Hint="Колличество"
+
+                                                IsReadOnly="True"
+                                                Margin="3"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                VerticalContentAlignment="Center"
+                                                Width="140"
+                                                Text="{Binding Count}" />
+                                            <TextBox
+                                                materialDesign:HintAssist.Hint="Ед измерения"
+                                                Margin="3"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                VerticalContentAlignment="Center"
+                                                IsReadOnly="True" Width="140"
+                                                Text="{Binding Ingredient.Unit.Name}" />
+
+                                        </StackPanel>
+
+                                    </Viewbox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+        <Grid Column="1">
+            <materialDesign:Card Margin="5">
+                <Grid>
+                    <Label
+                        FontSize="30"
+                        Content="Техпроцесс"
+                        HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                        <ListBox Margin="0,50,0,0" x:Name="TechList" Style="{StaticResource MaterialDesignCardsListBox}"
+                                 ItemsSource="{Binding TechnicalStages}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Viewbox>
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBox
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                IsReadOnly="True"
+                                                materialDesign:HintAssist.Hint="Номер"
+                                                HorizontalContentAlignment="Center" Margin="5,0,6,0"
+                                                VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                Text="{Binding Number}" />
+
+                                            <TextBox
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                IsReadOnly="True"
+                                                materialDesign:HintAssist.Hint="Этап"
+                                                HorizontalContentAlignment="Center"  Margin="5,0,6,0"
+                                                VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                Text="{Binding Stage.Name}" />
+                                            <Expander  Margin="0,0,6,0" Header="Описиние">
+                                                <TextBox
+                                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                    IsReadOnly="True" TextWrapping="Wrap"
+                                                    Text="{Binding Stage.Description}" />
+                                            </Expander>
+                                            <Expander  Margin="0,0,6,0" Header="Параметры">
+                                                <TextBox IsReadOnly="True"
+                                                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                         TextWrapping="Wrap" Text="{Binding Info}" />
+
+                                            </Expander>
+                                            <TextBox
+
+                                                materialDesign:HintAssist.Hint="Оборудование"
+                                                Margin="3"
+                                                Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                VerticalContentAlignment="Center"
+                                                IsReadOnly="True"  TextWrapping="Wrap"
+                                                Text="{Binding Stage.Equipment.Name, StringFormat=Оборудование:         {0}}" />
+
+
+                                        </StackPanel>
+                                    </Viewbox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
+                    </ScrollViewer>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+
+    </Grid>
+</Window>
